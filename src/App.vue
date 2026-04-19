@@ -1,22 +1,35 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
+import { RouterView } from 'vue-router';
 
 import { useGitHubStore } from '@/stores/github';
 import { useTheme } from '@/composables/theme';
 
+import BaseContainer from '@/components/layout/BaseContainer.vue';
+import TheHeader from '@/components/layout/TheHeader.vue';
+
 const store = useGitHubStore();
-const { toggleTheme, initTheme } = useTheme();
+const { initTheme } = useTheme();
+
+initTheme();
 
 onMounted(async () => {
   store.initHistory();
-  initTheme();
 });
 </script>
 
 <template>
-  <h1>github explorer</h1>
-  <br>
-  <button type="button" @click="toggleTheme">toggle theme</button>
+  <div
+    class="min-h-screen flex flex-col bg-slate-300 dark:bg-gray-900 text-gray-700 dark:text-gray-200"
+  >
+    <TheHeader />
+
+    <main class="grow pt-8 pb-10">
+      <BaseContainer>
+        <RouterView />
+      </BaseContainer>
+    </main>
+  </div>
 </template>
 
 <style scoped></style>
