@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import { Star, GitFork, Code, History } from '@lucide/vue';
 
-import type { GitHubRepo } from '@/types/github';
-import StatListItem from '@/components/ui/StatListItem.vue';
 import { getLanguageBgColorClass } from '@/constants';
+import type { GitHubRepo } from '@/types/github';
+import { formatIsoDate } from '@/utils/formatIsoDate';
+import StatListItem from '@/components/ui/StatListItem.vue';
 
 // @TODO: withDefaults
 defineProps<{
@@ -35,27 +36,39 @@ defineProps<{
 
       <ul class="mt-auto">
         <StatListItem :label="`Stars`" :content="repo.stargazers_count">
-          <Star :size="16" />
+          <template #icon>
+            <Star :size="16" />
+          </template>
         </StatListItem>
 
         <StatListItem :label="`Forks`" :content="repo.forks_count">
-          <GitFork :size="16" />
+          <template #icon>
+            <GitFork :size="16" />
+          </template>
         </StatListItem>
 
-        <StatListItem
-          v-if="repo.language"
-          :label="`Language`"
-          :content="repo.language"
-          :content-class="[
-            'px-1 rounded-sm inline-block text-xs font-semibold',
-            getLanguageBgColorClass(repo.language),
-          ]"
-        >
-          <Code :size="16" />
+        <StatListItem v-if="repo.language" :label="`Language`">
+          <template #icon>
+            <Code :size="16" />
+          </template>
+
+          <span
+            :class="[
+              'px-1 rounded-sm inline-block text-xs font-semibold',
+              getLanguageBgColorClass(repo.language),
+            ]"
+          >
+            {{ repo.language }}</span
+          >
         </StatListItem>
 
-        <StatListItem :label="`Last updated`" :content="repo.updated_at" no-truncate>
-          <History :size="16" />
+        <StatListItem :label="`Last updated`">
+          <template #icon>
+            <History :size="16" />
+          </template>
+          <span class="whitespace-nowrap">
+            {{ formatIsoDate(repo.updated_at) }}
+          </span>
         </StatListItem>
       </ul>
     </div>
