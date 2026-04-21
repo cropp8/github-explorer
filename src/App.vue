@@ -7,6 +7,7 @@ import { useTheme } from '@/composables/theme';
 
 import BaseContainer from '@/components/layout/BaseContainer.vue';
 import TheHeader from '@/components/layout/TheHeader.vue';
+import ToastContainer from '@/components/ui/ToastContainer.vue';
 
 const store = useGitHubStore();
 const { initTheme } = useTheme();
@@ -24,12 +25,14 @@ onMounted(async () => {
   >
     <TheHeader />
 
-    <main class="grow pt-8 pb-10 text-base">
+    <main class="grow pt-8 pb-10 text-base relative">
       <BaseContainer>
         <RouterView />
       </BaseContainer>
     </main>
   </div>
+
+  <ToastContainer />
 </template>
 
 <style scoped></style>

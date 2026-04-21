@@ -11,14 +11,4 @@ const apiClient = axios.create({
   },
 });
 
-apiClient.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    // @TODO: add error handling
-    console.error('API error: ', error.response?.status);
-
-    return Promise.reject(error);
-  },
-);
-
 export default apiClient;

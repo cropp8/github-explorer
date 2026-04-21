@@ -30,7 +30,7 @@ defineProps<{
           :href="user.html_url"
           rel="noopener noreferrer"
           target="_blank"
-          class="font-semibold text-center text-indigo-500 hover:text-amber-600 dark:text-indigo-400 dark:hover:text-amber-300 transition-[color]"
+          class="font-semibold text-center text-indigo-500 hover:text-amber-600 dark:text-indigo-400 dark:hover:text-amber-300 transition-colors"
         >
           {{ `@${user.login}` }}
         </a>
@@ -41,14 +41,14 @@ defineProps<{
         :href="user.html_url"
         rel="noopener noreferrer"
         target="_blank"
-        class="text-sm font-semibold text-center text-indigo-500 hover:text-amber-600 dark:text-indigo-400 dark:hover:text-amber-300 transition-[color]"
+        class="text-sm font-semibold text-center text-indigo-600 hover:text-amber-600 dark:text-indigo-400 dark:hover:text-amber-300 transition-[color]"
       >
         {{ `@${user.login}` }}
       </a>
     </div>
 
     <div>
-      <p v-if="user.location" class="flex gap-1 text-gray-500 dark:text-gray-400">
+      <p v-if="user.location" class="flex gap-1 text-gray-600 dark:text-gray-400">
         <MapPin :size="16" :stroke-width="3" />
         <strong>{{ user.location }}</strong>
       </p>

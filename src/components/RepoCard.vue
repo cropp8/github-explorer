@@ -32,8 +32,10 @@ defineProps<{
         </a>
       </h3>
 
+      <!-- @TODO: truncate -->
       <p class="text-xs">{{ repo.description }}</p>
 
+      <!-- @TODO: use subgrid rows -->
       <ul class="mt-auto">
         <StatListItem :label="`Stars`" :content="repo.stargazers_count">
           <template #icon>
