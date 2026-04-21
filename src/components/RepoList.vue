@@ -35,18 +35,23 @@ const changePage = (page: number): void => {
 
 <template>
   <template v-if="githubStore.user && githubStore.repos.length > 0">
-    <h2 class="col-span-9 text-2xl font-semibold py-2">
+    <h2 class="col-span-1 md:col-span-8 lg:col-span-9 text-2xl font-semibold py-2">
       Public repositories of user
       <span class="inline-block px-1 rounded-sm bg-gray-200 dark:bg-gray-900 dark:text-gray-400"
         >@{{ githubStore.user.login }}</span
       >
     </h2>
 
-    <ul class="grid grid-cols-subgrid col-span-9 gap-y-4">
-      <RepoCard v-for="repo in githubStore.repos" :key="repo.id" :repo="repo" />
+    <ul class="grid grid-cols-subgrid col-span-1 md:col-span-8 lg:col-span-9 gap-y-4">
+      <RepoCard
+        v-for="repo in githubStore.repos"
+        :key="repo.id"
+        :repo="repo"
+        class="col-span-1 md:col-span-4 lg:col-span-3"
+      />
     </ul>
 
-    <div v-if="totalPages > 1" class="col-span-9 mt-6">
+    <div v-if="totalPages > 1" class="col-span-1 md:col-span-8 lg:col-span-9 mt-6">
       <BasePagination
         :total-pages="totalPages"
         :current-page="currentPage"

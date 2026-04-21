@@ -46,18 +46,22 @@ watch(
     tabindex="-1"
     class="outline-none"
   >
-    <div class="grid grid-cols-12 gap-4">
-      <div class="col-span-3">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+      <div class="col-span-1 md:col-span-4 lg:col-span-3">
         <UserCard :user="githubStore.user" />
       </div>
 
       <div
-        class="col-span-9 rounded-lg bg-white dark:bg-gray-950 p-4 min-h-full grid grid-cols-subgrid gap-y-4 content-start relative"
+        class="col-span-1 md:col-span-8 lg:col-span-9 rounded-lg bg-white dark:bg-gray-950 p-4 md:min-h-full grid grid-cols-subgrid gap-y-4 content-start relative"
+        :class="[{ 'min-h-50': githubStore.repos.length === 0 }, 'md:min-h-auto']"
         :aria-busy="githubStore.reposLoading && !githubStore.userLoading"
       >
         <RepoList />
 
-        <BaseLoadingOverlay :is-visible="githubStore.reposLoading && !githubStore.userLoading" />
+        <BaseLoadingOverlay
+          :is-visible="githubStore.reposLoading && !githubStore.userLoading"
+          class="rounded-lg"
+        />
       </div>
     </div>
   </div>

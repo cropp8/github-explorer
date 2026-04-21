@@ -26,7 +26,7 @@ onMounted(async () => {
   >
     <TheHeader />
 
-    <main class="grow pt-8 pb-10 text-base relative">
+    <main class="grow pt-21 pb-10 text-base relative">
       <BaseContainer>
         <RouterView />
       </BaseContainer>

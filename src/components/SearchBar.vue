@@ -174,10 +174,10 @@ watch(
 
     <button
       type="submit"
-      class="rounded-lg bg-violet-500 text-white flex gap-1 items-center py-1 px-2 cursor-pointer hover:bg-violet-600 transition-colors active:bg-violet-700 font-semibold outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
+      class="rounded-lg bg-violet-500 text-white flex gap-1 items-center py-1 px-4 md:px-2 cursor-pointer hover:bg-violet-600 transition-colors active:bg-violet-700 font-semibold outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
     >
       <Search :size="14" :stroke-width="3.5" aria-hidden="true" />
-      search
+      <span class="sr-only md:not-sr-only">search</span>
     </button>
   </form>
 </template>

@@ -6,9 +6,9 @@ import BaseContainer from '@/components/layout/BaseContainer.vue';
 
 <template>
   <footer class="bg-gray-700 dark:bg-gray-800 text-white transition-[bg-color] group">
-    <BaseContainer class="py-2 sm:py-6">
-      <div class="grid grid-cols-12">
-        <div class="col-span-6">
+    <BaseContainer class="py-6">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-y-10">
+        <div class="col-span-1 md:col-span-6">
           <nav aria-label="Footer links">
             <a
               href="https://github.com/cropp8/github-explorer"
@@ -53,8 +53,8 @@ import BaseContainer from '@/components/layout/BaseContainer.vue';
             </ul>
           </div>
         </div>
-        <div class="col-span-6 flex flex-col items-end justify-between">
-          <p class="text-sm text-center cursor-default">
+        <div class="col-span-1 md:col-span-6 flex flex-col gap-2 md:items-end justify-between">
+          <p class="text-sm cursor-default">
             Built with
             <span
               class="bg-emerald-500/40 group-hover:bg-emerald-500/60 px-1 rounded-sm inline-block font-semibold transition-colors duration-1000"

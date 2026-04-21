@@ -13,7 +13,7 @@ defineProps<{
 
 <template>
   <li
-    class="relative group overflow-hidden col-span-3 p-3 bg-white dark:bg-gray-900 rounded-md wrap-break-word hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gray-500/20 border-2 border-gray-100 hover:border-gray-200 transition-all dark:hover:shadow-none dark:border-gray-700 dark:hover:translate-0 dark:hover:border-gray-600"
+    class="relative group overflow-hidden p-3 bg-white dark:bg-gray-900 rounded-md wrap-break-word hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gray-500/20 border-2 border-gray-100 hover:border-gray-200 transition-all dark:hover:shadow-none dark:border-gray-700 dark:hover:translate-0 dark:hover:border-gray-600"
   >
     <div
       class="pointer-events-none absolute inset-0 bg-radial-[circle_at_center] from-violet-400/20 to-transparent from-10% opacity-0 group-hover:opacity-100 transition-opacity duration-500 hidden dark:block"
