@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { Search, History, ActivitySquare } from '@lucide/vue';
+import { Search, History } from '@lucide/vue';
 
 import { useGitHubStore } from '@/stores/github';
 
