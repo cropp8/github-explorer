@@ -78,8 +78,7 @@ defineProps<{
     <template v-if="user.bio">
       <hr class="border-gray-300 dark:border-gray-700 my-2" />
 
-      <div class="text-xs">
-        <!-- @TODO: truncate if too long -->
+      <div class="text-xs line-clamp-3">
         {{ user.bio }}
       </div>
     </template>

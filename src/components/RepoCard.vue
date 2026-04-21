@@ -31,8 +31,7 @@ defineProps<{
         </a>
       </h3>
 
-      <!-- @TODO: truncate if too long -->
-      <p class="text-xs">{{ repo.description }}</p>
+      <p class="text-xs line-clamp-3">{{ repo.description }}</p>
 
       <ul class="mt-auto">
         <StatListItem :label="`Stars`" :content="repo.stargazers_count">
