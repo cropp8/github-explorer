@@ -1,17 +1,20 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
+import { Sun, MoonStar } from '@lucide/vue';
 
 import { useTheme } from '@/composables/theme';
 
+import BaseContainer from '@/components/layout/BaseContainer.vue';
 import TheLogoIcon from '@/components/layout/TheLogoIcon.vue';
 import ToggleSwitch from '@/components/ui/ToggleSwitch.vue';
+import SearchBar from '@/components/SearchBar.vue';
 
 const { isDarkTheme } = useTheme();
 </script>
 
 <template>
-  <header class="bg-violet-300 dark:bg-gray-800">
-    <div class="max-w-5xl mx-auto w-full px-4 sm:px-8 py-1 sm:py-2">
+  <header class="bg-violet-300 dark:bg-gray-800 transition-[bg-color]">
+    <BaseContainer class="py-1 sm:py-2">
       <div class="grid grid-cols-12 items-center">
         <div class="col-span-3">
           <RouterLink
@@ -22,12 +25,17 @@ const { isDarkTheme } = useTheme();
             <TheLogoIcon />
           </RouterLink>
         </div>
-        <div class="col-span-6">SearchBar here</div>
+        <div class="col-span-6">
+          <SearchBar />
+        </div>
         <div class="col-span-3 flex justify-end">
-          <ToggleSwitch v-model="isDarkTheme" />
-          <!-- @TODO: add sun and moon icons -->
+          <div class="flex gap-2 items-center">
+            <Sun :size="20" />
+            <ToggleSwitch v-model="isDarkTheme" />
+            <MoonStar :size="20" />
+          </div>
         </div>
       </div>
-    </div>
+    </BaseContainer>
   </header>
 </template>

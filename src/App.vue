@@ -20,11 +20,11 @@ onMounted(async () => {
 
 <template>
   <div
-    class="min-h-screen flex flex-col bg-slate-300 dark:bg-gray-900 text-gray-700 dark:text-gray-200"
+    class="min-h-screen flex flex-col bg-gray-300 dark:bg-gray-900 text-gray-700 dark:text-gray-200 transition-[bg-color]"
   >
     <TheHeader />
 
-    <main class="grow pt-8 pb-10">
+    <main class="grow pt-8 pb-10 text-base">
       <BaseContainer>
         <RouterView />
       </BaseContainer>

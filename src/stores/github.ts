@@ -14,7 +14,6 @@ export const useGitHubStore = defineStore('github', {
   }),
 
   actions: {
-    // @TODO: run in onMounted
     initHistory() {
       try {
         const saved = localStorage.getItem('searchHistory');
@@ -23,7 +22,6 @@ export const useGitHubStore = defineStore('github', {
           this.searchHistory = JSON.parse(saved);
         }
       } catch (error) {
-        // @TODO: error handler
         console.error('Failed to parse search history from local storage', error);
 
         this.searchHistory = [];
@@ -41,6 +39,8 @@ export const useGitHubStore = defineStore('github', {
     async fetchUser(username: string) {
       this.loading = true;
       this.error = null;
+      this.user = null;
+      this.repos = [];
 
       try {
         const [userData, reposData] = await Promise.all([

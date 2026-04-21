@@ -23,8 +23,6 @@ export function useTheme() {
 
     isDarkTheme.value = savedTheme === 'dark' || (!savedTheme && prefersDark);
 
-    console.log(savedTheme, prefersDark, isDarkTheme.value);
-
     updateTheme();
   };
 
