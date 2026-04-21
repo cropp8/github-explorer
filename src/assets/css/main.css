@@ -13,8 +13,6 @@
   strong {
     font-weight: 600;
   }
-
-  /* @TODO: global style for links, make them text-violet-600 */
 }
 
 @theme {
