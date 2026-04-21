@@ -19,7 +19,7 @@ const { isDarkTheme } = useTheme();
         <div class="col-span-3">
           <RouterLink
             :to="{ name: 'home' }"
-            class="inline-flex p-2 hover:opacity-80 transition-opacity"
+            class="inline-flex p-2 hover:opacity-80 transition-opacity outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
             aria-label="GitHub Explorer Home"
           >
             <TheLogoIcon />
@@ -30,9 +30,9 @@ const { isDarkTheme } = useTheme();
         </div>
         <div class="col-span-3 flex justify-end">
           <div class="flex gap-2 items-center">
-            <Sun :size="20" />
-            <ToggleSwitch v-model="isDarkTheme" />
-            <MoonStar :size="20" />
+            <Sun :size="20" aria-hidden="true" />
+            <ToggleSwitch v-model="isDarkTheme" aria-label="Toggle dark mode" />
+            <MoonStar :size="20" aria-hidden="true" />
           </div>
         </div>
       </div>

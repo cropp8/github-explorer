@@ -14,6 +14,14 @@ const router = createRouter({
       name: 'user-profile',
       component: () => import('@/views/UserProfileView.vue'),
     },
+    {
+      path: '/user',
+      redirect: '/',
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      redirect: '/',
+    },
   ],
 });
 

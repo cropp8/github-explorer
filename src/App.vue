@@ -8,6 +8,7 @@ import { useTheme } from '@/composables/theme';
 import BaseContainer from '@/components/layout/BaseContainer.vue';
 import TheHeader from '@/components/layout/TheHeader.vue';
 import ToastContainer from '@/components/ui/ToastContainer.vue';
+import TheFooter from '@/components/layout/TheFooter.vue';
 
 const store = useGitHubStore();
 const { initTheme } = useTheme();
@@ -30,6 +31,8 @@ onMounted(async () => {
         <RouterView />
       </BaseContainer>
     </main>
+
+    <TheFooter />
   </div>
 
   <ToastContainer />

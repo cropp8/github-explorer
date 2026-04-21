@@ -7,23 +7,29 @@ const { isVisible = false } = defineProps<{
   isVisible?: boolean;
 }>();
 
+const fadeTransition = {
+  enterActiveClass: 'transition-opacity duration-300 ease-out',
+  enterFromClass: 'opacity-0',
+  enterToClass: 'opacity-100',
+  leaveActiveClass: 'transition-opacity duration-200 ease-in',
+  leaveFromClass: 'opacity-100',
+  leaveToClass: 'opacity-0',
+};
+
 usePositionedAncestorCheck('BaseLoadingOverlay');
 </script>
 
 <template>
-  <Transition
-    enter-active-class="transition-opacity duration-300 ease-out"
-    enter-from-class="opacity-0"
-    enter-to-class="opacity-100"
-    leave-active-class="transition-opacity duration-200 ease-in"
-    leave-from-class="opacity-100"
-    leave-to-class="opacity-0"
-  >
+  <Transition v-bind="fadeTransition">
     <div
       v-if="isVisible"
       class="absolute inset-0 z-50 bg-white/30 dark:bg-gray-950/70 backdrop-blur-sm flex items-center justify-center text-gray-500"
+      role="status"
+      aria-live="polite"
     >
-      <LoaderCircle :size="48" class="animate-spin" />
+      <LoaderCircle :size="48" class="animate-spin" aria-hidden="true" />
+
+      <span class="sr-only">Loading, please wait...</span>
     </div>
   </Transition>
 </template>

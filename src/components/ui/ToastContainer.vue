@@ -7,7 +7,11 @@ const store = useToastStore();
 
 <template>
   <Teleport to="body">
-    <div class="fixed bottom-5 right-5 z-100 flex flex-col gap-2 pointer-events-none">
+    <div
+      class="fixed bottom-5 right-5 z-100 flex flex-col gap-2 pointer-events-none"
+      aria-live="polite"
+      aria-atomic="true"
+    >
       <TransitionGroup
         enter-active-class="transition duration-300 ease-out"
         enter-from-class="transform translate-x-full opacity-0"

@@ -6,7 +6,7 @@ import { useGitHubStore } from '@/stores/github';
 import { GH_API_ITEMS_PER_PAGE } from '@/constants';
 
 import RepoCard from '@/components/RepoCard.vue';
-import BasePagination from '@/components/BasePagination.vue';
+import BasePagination from '@/components/ui/BasePagination.vue';
 
 const route = useRoute();
 const router = useRouter();
@@ -41,9 +41,12 @@ const changePage = (page: number): void => {
         >@{{ githubStore.user.login }}</span
       >
     </h2>
-    <RepoCard v-for="repo in githubStore.repos" :key="repo.id" :repo="repo" />
 
-    <div v-if="totalPages > 1" class="col-span-9">
+    <ul class="grid grid-cols-subgrid col-span-9 gap-y-4">
+      <RepoCard v-for="repo in githubStore.repos" :key="repo.id" :repo="repo" />
+    </ul>
+
+    <div v-if="totalPages > 1" class="col-span-9 mt-6">
       <BasePagination
         :total-pages="totalPages"
         :current-page="currentPage"

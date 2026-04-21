@@ -6,14 +6,13 @@ import type { GitHubRepo } from '@/types/github';
 import { formatIsoDate } from '@/utils/formatIsoDate';
 import StatListItem from '@/components/ui/StatListItem.vue';
 
-// @TODO: withDefaults
 defineProps<{
   repo: GitHubRepo;
 }>();
 </script>
 
 <template>
-  <div
+  <li
     class="relative group overflow-hidden col-span-3 p-3 bg-white dark:bg-gray-900 rounded-md wrap-break-word hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gray-500/20 border-2 border-gray-100 hover:border-gray-200 transition-all dark:hover:shadow-none dark:border-gray-700 dark:hover:translate-0 dark:hover:border-gray-600"
   >
     <div
@@ -26,32 +25,31 @@ defineProps<{
           :href="repo.html_url"
           rel="noopener noreferrer"
           target="_blank"
-          class="font-semibold text-center text-indigo-500 hover:text-amber-600 dark:text-indigo-400 dark:hover:text-amber-300 transition-[color]"
+          class="font-semibold text-center text-indigo-500 hover:text-amber-600 dark:text-indigo-400 dark:hover:text-amber-300 transition-colors outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
         >
           {{ repo.name }}
         </a>
       </h3>
 
-      <!-- @TODO: truncate -->
+      <!-- @TODO: truncate if too long -->
       <p class="text-xs">{{ repo.description }}</p>
 
-      <!-- @TODO: use subgrid rows -->
       <ul class="mt-auto">
         <StatListItem :label="`Stars`" :content="repo.stargazers_count">
           <template #icon>
-            <Star :size="16" />
+            <Star :size="16" aria-hidden="true" />
           </template>
         </StatListItem>
 
         <StatListItem :label="`Forks`" :content="repo.forks_count">
           <template #icon>
-            <GitFork :size="16" />
+            <GitFork :size="16" aria-hidden="true" />
           </template>
         </StatListItem>
 
         <StatListItem v-if="repo.language" :label="`Language`">
           <template #icon>
-            <Code :size="16" />
+            <Code :size="16" aria-hidden="true" />
           </template>
 
           <span
@@ -66,7 +64,7 @@ defineProps<{
 
         <StatListItem :label="`Last updated`">
           <template #icon>
-            <History :size="16" />
+            <History :size="16" aria-hidden="true" />
           </template>
           <span class="whitespace-nowrap">
             {{ formatIsoDate(repo.updated_at) }}
@@ -74,5 +72,5 @@ defineProps<{
         </StatListItem>
       </ul>
     </div>
-  </div>
+  </li>
 </template>

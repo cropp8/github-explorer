@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { watch } from 'vue';
+import { watch, ref, nextTick } from 'vue';
 import { useRoute } from 'vue-router';
 
 import { useGitHubStore } from '@/stores/github';
@@ -11,12 +11,18 @@ import BaseLoadingOverlay from '@/components/ui/BaseLoadingOverlay.vue';
 const route = useRoute();
 const githubStore = useGitHubStore();
 
+const resultsContainer = ref<HTMLElement | null>(null);
+
 watch(
   [() => route.params.username, () => route.query.page],
-  ([newUsername, newPage], [oldUsername, oldPage]) => {
+  async ([newUsername, newPage], [oldUsername, oldPage]) => {
     if (newUsername !== oldUsername) {
       if (newUsername) {
         githubStore.fetchUser(newUsername as string);
+
+        await nextTick();
+
+        resultsContainer.value?.focus();
       }
 
       return;
@@ -33,14 +39,21 @@ watch(
 </script>
 
 <template>
-  <div v-if="githubStore.user">
+  <div
+    v-if="githubStore.user"
+    ref="resultsContainer"
+    :aria-busy="githubStore.userLoading"
+    tabindex="-1"
+    class="outline-none"
+  >
     <div class="grid grid-cols-12 gap-4">
       <div class="col-span-3">
         <UserCard :user="githubStore.user" />
       </div>
 
       <div
-        class="col-span-9 rounded-lg bg-white dark:bg-gray-950 p-4 min-h-full grid grid-cols-subgrid gap-y-4 gap-x-3 content-start relative"
+        class="col-span-9 rounded-lg bg-white dark:bg-gray-950 p-4 min-h-full grid grid-cols-subgrid gap-y-4 content-start relative"
+        :aria-busy="githubStore.reposLoading && !githubStore.userLoading"
       >
         <RepoList />
 
@@ -59,7 +72,7 @@ watch(
     <p class="text-gray-500">Check the spelling or try another user.</p>
     <RouterLink
       :to="{ name: 'home' }"
-      class="rounded-lg mt-4 bg-violet-500 text-white flex gap-1 items-center py-1 px-2 cursor-pointer hover:bg-violet-600 transition-colors active:bg-violet-700 font-semibold"
+      class="rounded-lg mt-4 bg-violet-500 text-white flex gap-1 items-center py-1 px-2 cursor-pointer hover:bg-violet-600 transition-colors active:bg-violet-700 font-semibold outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
     >
       Go back home
     </RouterLink>

@@ -13,6 +13,7 @@ const emit = defineEmits(['close']);
 
 <template>
   <div
+    :role="type === 'error' ? 'alert' : 'status'"
     class="flex items-center gap-3 p-4 rounded-lg shadow-lg border min-w-75 pointer-events-auto"
     :class="{
       'bg-pink-50 border-pink-200 text-pink-800 dark:text-pink-500 dark:bg-pink-950/50 dark:border-pink-900':
@@ -26,12 +27,22 @@ const emit = defineEmits(['close']);
     <component
       :is="type === 'error' ? CircleAlert : type === 'success' ? CircleCheck : Info"
       :size="20"
+      aria-hidden="true"
     />
 
     <span class="flex-1 text-sm font-medium">{{ message }}</span>
 
-    <button @click="emit('close')" class="hover:opacity-70">
-      <X :size="16" />
+    <button
+      @click="emit('close')"
+      class="hover:opacity-70"
+      aria-label="Dismiss notification"
+      :class="{
+        'focus-visible:ring-pink-500': type === 'error',
+        'focus-visible:ring-teal-500': type === 'success',
+        'focus-visible:ring-gray-500': type === 'info',
+      }"
+    >
+      <X :size="16" aria-hidden="true" />
     </button>
   </div>
 </template>
