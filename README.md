@@ -1,48 +1,94 @@
-# github-explorer
+# 🛸 GitHub Explorer
 
-This template should help get you started developing with Vue 3 in Vite.
+A fully accessible GitHub profile explorer built with Vue 3, TypeScript, and Pinia. Designed to demonstrate clean architecture, reactive state management, and inclusive UX patterns.
 
-## Recommended IDE Setup
+🚀 **[Live Demo on Netlify](https://cropp8-ghx.netlify.app/)**
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## 🛠️ Tech Stack
 
-## Recommended Browser Setup
+- **Framework:** Vue 3 (Composition API with `<script setup>`)
+- **Language:** TypeScript — strict typing on all API responses, store state, and composables
+- **State Management:** Pinia (modular `github` and `toast` stores)
+- **Routing:** Vue Router 5
+- **Styling:** Tailwind CSS 4 (mobile-first, dark mode support)
+- **Icons:** Lucide Vue
+- **HTTP Client:** Axios
+- **Build Tool:** Vite 8
+- **Linting:** oxlint + ESLint + Prettier
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+## ✨ Key Features
 
-## Type Support for `.vue` Imports in TS
+- **Smart Search:** Keyboard-navigable history dropdown with `ArrowUp`, `ArrowDown`, `Enter`, and `Escape` support.
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+- **Persistent History:** Last 5 unique searches saved to `localStorage` for quick access.
 
-## Customize configuration
+- **Custom Toast System:** Global notification bus built from scratch using a Pinia store and `<Teleport>` — no third-party libraries.
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+- **Dynamic Pagination:** Server-side pagination for repository lists, driven by `route.query.page`.
 
-## Project Setup
+- **Responsive Layout:** 12-column grid that transitions seamlessly from mobile to desktop.
+
+- **Theme Switching:** Full dark/light mode with system preference detection (`prefers-color-scheme`) and `localStorage` persistence.
+
+## 🏗️ Architectural Decisions
+
+### 1. The Service Layer
+
+Rather than calling Axios directly from Pinia stores, I implemented a Service Pattern (`src/services/githubService.ts`). This decouples HTTP logic from state management, making both independently testable.
+
+### 2. Global Toast Bus
+
+Instead of a third-party library, I built a custom toast system using a Pinia store (`toast.ts`) and a `<Teleport>` container (`ToastContainer.vue`). This allows any part of the app — including logic outside of components — to trigger non-blocking notifications.
+
+### 3. Combined Route Watcher
+
+To avoid redundant API calls during navigation, `UserProfileView` uses a unified `watch` on both `route.params.username` and `route.query.page`. It intelligently distinguishes between a username change (full profile reset) and a page change (repository list refresh only).
+
+## ♿ Accessibility (A11y)
+
+Accessibility was a core requirement, not an afterthought:
+
+- **Keyboard Navigation:** The search history dropdown supports `ArrowUp`, `ArrowDown`, `Enter`, and `Escape` via `aria-activedescendant` and `role="combobox"` / `role="listbox"`.
+
+- **Screen Reader Support:** `aria-live="polite"` on the toast container and `role="status"` on loading overlays.
+
+- **Focus Management:** `focus-visible` rings on all interactive elements; focus is programmatically moved to the results container on route transition.
+
+- **Semantic HTML:** `<main>`, `<header>`, `<footer>`, `<nav>`, `<form role="search">`, and `<label>` landmarks throughout.
+
+## 🚦 Getting Started
 
 ```sh
+git clone https://github.com/cropp8/github-explorer.git
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
-
 ```sh
-npm run build
+npm run build   # type-check + production build
+npm run lint    # oxlint + eslint with auto-fix
+npm run format  # prettier
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+## ⚠️ API Constraints
 
-```sh
-npm run lint
+The GitHub Public API allows 60 unauthenticated requests/hour. To raise this to 5,000/hour, create a `.env.local` file in the project root:
+
 ```
+VITE_GITHUB_TOKEN=your_personal_access_token
+```
+
+A classic token with no scopes (read-only public data) is sufficient. If the limit is reached, the app handles the `403` response and notifies the user via the toast system.
+
+## 🔮 Future Improvements
+
+- **Vitest:** Add unit tests for Pinia store logic.
+
+- **Skeleton Loaders:** Replace the global spinner with content-specific skeleton screens.
+
+- **GitHub OAuth:** Add auth flow to raise the API rate limit to 5,000/hr for all users.
+- **Component-Driven CSS Architecture:** Centralized BaseLink UI component. to encapsulate global styling logic and standard accessibility attributes into a single reusable unit.
+
+- **Mobile UX Optimization:** implementing media queries (e.g., @media (hover: hover)) to disable persistent "sticky" hover states on touch devices to provide more native feel.
+
+- **Nuxt 3 Migration:** Re-architect with Nuxt to leverage SSR for SEO and utilize Nitro/useCookie for robust state persistence.
