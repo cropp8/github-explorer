@@ -4,6 +4,8 @@ A fully accessible GitHub profile explorer built with Vue 3, TypeScript, and Pin
 
 🚀 **[Live Demo on Netlify](https://cropp8-ghx.netlify.app/)**
 
+![GitHub Explorer preview](./docs/screenshots/ghx.png)
+
 ## 🛠️ Tech Stack
 
 - **Framework:** Vue 3 (Composition API with `<script setup>`)
