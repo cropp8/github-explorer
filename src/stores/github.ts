@@ -11,7 +11,7 @@ export const useGitHubStore = defineStore('github', () => {
   const repos = ref<GitHubRepo[]>([]);
   const userLoading = ref<boolean>(false);
   const reposLoading = ref<boolean>(false);
-  const error = ref<string | null>(null); // do we need this?
+  const error = ref<string | null>(null);
   const searchHistory = ref<string[]>([]);
 
   const toast = useToast();
