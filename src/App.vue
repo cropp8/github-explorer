@@ -15,7 +15,7 @@ const { initTheme } = useTheme();
 
 initTheme();
 
-onMounted(async () => {
+onMounted(() => {
   store.initHistory();
 });
 </script>
