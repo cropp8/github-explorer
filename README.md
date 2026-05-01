@@ -1,5 +1,8 @@
 # 🛸 GitHub Explorer
 
+> ⚡ **This project has been rewritten in Nuxt 4!**
+> Built with SSR for better SEO, optimized for performance via the Nitro engine, and featuring global offline error handling — **[view it here](https://github.com/cropp8/github-explorer-nuxt).**
+
 A fully accessible GitHub profile explorer built with Vue 3, TypeScript, and Pinia. Designed to demonstrate clean architecture, reactive state management, and inclusive UX patterns.
 
 🚀 **[Live Demo on Netlify](https://cropp8-ghx.netlify.app/)**
@@ -93,4 +96,4 @@ A classic token with no scopes (read-only public data) is sufficient. If the lim
 
 - **Mobile UX Optimization:** implementing media queries (e.g., @media (hover: hover)) to disable persistent "sticky" hover states on touch devices to provide more native feel.
 
-- **Nuxt 3 Migration:** Re-architect with Nuxt to leverage SSR for SEO and utilize Nitro/useCookie for robust state persistence.
+- **Nuxt 4 Migration:** ✅ Done — [github-explorer-nuxt](https://github.com/cropp8/github-explorer-nuxt).
